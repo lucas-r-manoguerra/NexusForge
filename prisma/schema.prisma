@@ -18,3 +18,40 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model AssetSource {
+  id          String   @id @default(uuid()) @db.Uuid
+  key         String   @unique // "polyhaven", "kenney", etc.
+  name        String
+  baseUrl     String
+  adapterType String // "api" | "scraping"
+  assets      Asset[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Asset {
+  id            String   @id @default(uuid()) @db.Uuid
+  sourceId      String   @db.Uuid
+  sourceAssetId String   // source-specific ID (not unique alone)
+  name          String
+  description   String?
+  type          String   // AssetType as string
+  spdxId        String   // License SPDX
+  licenseName   String
+  commercial    Boolean
+  attribution   Boolean
+  downloadUrl   String
+  thumbnailUrl  String?
+  tags          String[] // PostgreSQL array
+  metadata      Json     // source-specific extras
+  discoveredAt  DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  source AssetSource @relation(fields: [sourceId], references: [id])
+
+  @@unique([sourceId, sourceAssetId])
+  @@index([type])
+  @@index([sourceId])
+}
