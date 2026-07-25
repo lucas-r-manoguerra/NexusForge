@@ -1,0 +1,11 @@
+{
+  "id": "1001",
+  "name": "Pavement 025",
+  "category": "materials",
+  "description": "A seamless pavement texture",
+  "tags": ["pavement", "stone", "road", "seamless"],
+  "license": "CC0",
+  "previews": {
+    "jpg_2k": "https://ambientcg.com/files/Pavement025_2K_JPG.zip"
+  }
+}

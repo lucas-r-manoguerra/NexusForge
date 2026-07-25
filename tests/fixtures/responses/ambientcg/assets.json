@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1001",
+    "name": "Pavement 025",
+    "category": "materials",
+    "tags": ["pavement", "stone", "road"],
+    "license": "CC0"
+  },
+  {
+    "id": "1002",
+    "name": "Sky 001",
+    "category": "hdris",
+    "tags": ["sky", "sunset", "outdoor"],
+    "license": "CC0"
+  }
+]

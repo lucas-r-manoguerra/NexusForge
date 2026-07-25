@@ -1,0 +1,16 @@
+{
+  "name": "brick_wall_001",
+  "type": "textures",
+  "description": "A photorealistic brick wall texture",
+  "categories": ["bricks"],
+  "tags": ["brick", "wall", "texture", "seamless"],
+  "latest_version": {
+    "id": "brick_wall_001_v1",
+    "license": "CC0",
+    "size": 2048,
+    "files": {
+      "diffuse": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/brick_wall_001_diff_2k.jpg",
+      "normal": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/brick_wall_001_nor_2k.jpg"
+    }
+  }
+}

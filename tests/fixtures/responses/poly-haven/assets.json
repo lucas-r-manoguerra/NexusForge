@@ -1,0 +1,24 @@
+[
+  {
+    "name": "brick_wall_001",
+    "type": "textures",
+    "categories": ["bricks"],
+    "tags": ["brick", "wall", "texture"],
+    "latest_version": {
+      "id": "brick_wall_001_v1",
+      "license": "CC0",
+      "size": 2048
+    }
+  },
+  {
+    "name": "hdri_outdoor",
+    "type": "hdris",
+    "categories": ["outdoor"],
+    "tags": ["sky", "outdoor", "hdri"],
+    "latest_version": {
+      "id": "hdri_outdoor_v1",
+      "license": "CC0",
+      "size": 2048
+    }
+  }
+]
