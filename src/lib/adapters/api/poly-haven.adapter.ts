@@ -64,19 +64,22 @@ export class PolyHavenAdapter implements AssetSourceGateway {
     );
     const type = TYPE_MAP[raw.type] ?? "model";
 
+    const files = raw.latest_version?.files;
+    const downloadUrl = files
+      ? `https://dl.polyhaven.org/file/ph-assets/${raw.type}/${raw.name}/${raw.latest_version!.id}/${Object.keys(files)[0]}`
+      : `https://polyhaven.com/${raw.type}/${raw.name}`;
+
     return {
       id: raw.name,
       sourceKey: this.sourceKey,
       name: raw.name,
       type,
       license,
-      downloadUrl: this.baseUrl,
+      downloadUrl,
       tags: raw.tags ?? [],
       metadata: {
         categories: raw.categories ?? [],
-        ...(raw.latest_version?.files
-          ? { files: raw.latest_version.files }
-          : {}),
+        ...(files ? { files } : {}),
       },
       discoveredAt: new Date(),
     };

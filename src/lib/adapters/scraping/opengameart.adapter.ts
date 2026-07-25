@@ -90,8 +90,21 @@ export class OpenGameArtAdapter implements AssetSourceGateway {
         const page = await browser.newPage();
         await page.goto(this.baseUrl, { waitUntil: "domcontentloaded" });
         await page.waitForSelector(SELECTORS.assetRow);
-        const html = await page.content();
-        const rawItems = parseOpenGameArtHtml(html);
+        const rawItems = await page.evaluate((sels) => {
+          const rows = document.querySelectorAll(sels.assetRow);
+          return Array.from(rows).map((row) => ({
+            name: row.querySelector(sels.name)?.textContent?.trim() ?? "",
+            thumbnail:
+              (row.querySelector(sels.thumbnail) as HTMLImageElement)?.src ??
+              "",
+            category:
+              row.querySelector(sels.category)?.textContent?.trim() ?? "",
+            link:
+              (row.querySelector(sels.link) as HTMLAnchorElement)?.href ?? "",
+            licenseText:
+              row.querySelector(sels.licenseText)?.textContent?.trim() ?? "",
+          }));
+        }, SELECTORS);
         const assets = rawItems.map((item) =>
           normalizeOpenGameArtItem(item, this.sourceKey),
         );

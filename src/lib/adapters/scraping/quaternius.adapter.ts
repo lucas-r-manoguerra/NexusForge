@@ -69,8 +69,17 @@ export class QuaterniusAdapter implements AssetSourceGateway {
         const page = await browser.newPage();
         await page.goto(this.baseUrl, { waitUntil: "domcontentloaded" });
         await page.waitForSelector(SELECTORS.assetCard);
-        const html = await page.content();
-        const rawItems = parseQuaterniusHtml(html);
+        const rawItems = await page.evaluate((sels) => {
+          const cards = document.querySelectorAll(sels.assetCard);
+          return Array.from(cards).map((card) => ({
+            name: card.querySelector(sels.name)?.textContent?.trim() ?? "",
+            thumbnail:
+              (card.querySelector(sels.thumbnail) as HTMLImageElement)?.src ??
+              "",
+            link:
+              (card.querySelector(sels.link) as HTMLAnchorElement)?.href ?? "",
+          }));
+        }, SELECTORS);
         const assets = rawItems.map((item) =>
           normalizeQuaterniusItem(item, this.sourceKey),
         );
